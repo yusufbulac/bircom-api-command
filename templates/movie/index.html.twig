@@ -1,0 +1,58 @@
+{% extends 'movie/layout.html.twig' %}
+
+{% block content %}
+
+    <div class="jumbotron jumbotron-fluid mt-5">
+        <div class="container">
+            <h1 class="display-4">Comedy Movies</h1>
+            <p class="lead">Top 10 comedy movies.</p>
+        </div>
+    </div>
+
+    {% for movie in movies %}
+        <div class="card my-5 p-2">
+            <div class="row">
+                <div class="col-lg-2">
+                    <img src="{{ movie.image }}" style="height: 300px;" class="img-thumbnail" alt="{{ movie.name }}">
+                </div>
+                <div class="col-sm-10">
+                    <div class="row mt-3 mb-2">
+                        <div class="col-sm">
+                            <p>
+                                Name : {{ movie.name }}
+                            </p>
+                            <p>
+                                Language : {{ movie.language }}
+                            </p>
+                            <p>
+                                Premiered : {{ movie.premiered|date("m/d/Y") }}
+                            </p>
+
+                        </div>
+                        <div class="col-sm-3 px-auto">
+                            <a href="{{ movie.urlOfficial }}" class="link-dark">Offical Site</a> | <a href="{{ movie.urlMaze }}" class="link-dark"> Tv Maze Site</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="heading{{ loop.index }}">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse{{ loop.index }}">
+                                            Summary
+                                        </button>
+                                    </h2>
+                                    <div id="collapse{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            {{ movie.summary | raw }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
